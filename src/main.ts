@@ -13,21 +13,23 @@ import {
 } from './searchResults.js';
 
 document.addEventListener('readystatechange', (event) => {
+  //@ts-ignore
   event.target.readyState === 'complete' && initApp();
 });
 
+const clear = document.getElementById('clear');
+const form = document.getElementById('searchBar');
+const search = document.getElementById('search');
+
 const initApp = () => {
   setSearchFocus();
-  const search = document.getElementById('search');
-  search.addEventListener('input', showClearTextButton);
-  const clear = document.getElementById('clear');
-  clear.addEventListener('click', clearSearchText);
-  clear.addEventListener('keydown', clearPushListener);
-  const form = document.getElementById('searchBar');
-  form.addEventListener('submit', submitTheSearch);
+  search!.addEventListener('input', showClearTextButton);
+  clear!.addEventListener('click', clearSearchText);
+  clear!.addEventListener('keydown', clearPushListener);
+  form!.addEventListener('submit', submitTheSearch);
 };
 
-const submitTheSearch = (event) => {
+const submitTheSearch = (event: SubmitEvent) => {
   event.preventDefault();
   deleteSearchResults();
   processTheSearch();
@@ -37,7 +39,7 @@ const submitTheSearch = (event) => {
 const processTheSearch = async () => {
   clearStatsLine();
   const searchTerm = getSearchTerm();
-  if (searchTerm === '') return; //TODO:
+  if (searchTerm === '') return;
   const resultArray = await retrieveSearchResults(searchTerm);
   if (resultArray.length) {
     buildSearchResults(resultArray);
