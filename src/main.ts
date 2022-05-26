@@ -17,9 +17,9 @@ document.addEventListener('readystatechange', (event) => {
   event.target.readyState === 'complete' && initApp();
 });
 
-const clear = document.getElementById('clear');
+export const clear = document.getElementById('clear');
 const form = document.getElementById('searchBar');
-const search = document.getElementById('search');
+export const search = <HTMLInputElement>document.getElementById('search');
 
 const initApp = () => {
   setSearchFocus();
