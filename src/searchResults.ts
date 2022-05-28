@@ -1,13 +1,17 @@
+import { SearchResultItem } from './types/ui.types';
+
 export const deleteSearchResults = () => {
   const parentElement = document.getElementById('searchResults');
-  let child = parentElement.lastElementChild;
-  while (child) {
-    parentElement.removeChild(child);
-    child = parentElement.lastElementChild;
+  if (parentElement) {
+    let child = parentElement.lastElementChild;
+    while (child) {
+      parentElement.removeChild(child);
+      child = parentElement.lastElementChild;
+    }
   }
 };
 
-export const buildSearchResults = (resultArray) => {
+export const buildSearchResults = (resultArray: SearchResultItem[]) => {
   resultArray.forEach((result) => {
     const resultItem = createResultItem(result);
     const resultContents = document.createElement('div');
@@ -20,11 +24,13 @@ export const buildSearchResults = (resultArray) => {
     resultContents.append(resultText);
     resultItem.append(resultContents);
     const searchResults = document.getElementById('searchResults');
-    searchResults.append(resultItem);
+    if (searchResults) {
+      searchResults.append(resultItem);
+    }
   });
 };
 
-const createResultItem = (result) => {
+const createResultItem = (result: SearchResultItem) => {
   const resultItem = document.createElement('div');
   resultItem.classList.add('resultItem');
   const resultTitle = document.createElement('div');
@@ -38,17 +44,17 @@ const createResultItem = (result) => {
   return resultItem;
 };
 
-const createResultImage = (result) => {
+const createResultImage = (result: SearchResultItem) => {
   const resultImage = document.createElement('div');
   resultImage.classList.add('resultImage');
   const img = document.createElement('img');
-  img.src = result.img;
+  img.src = result.img!;
   img.alt = result.title;
   resultImage.append(img);
   return resultImage;
 };
 
-const createResultText = (result) => {
+const createResultText = (result: SearchResultItem) => {
   const resultText = document.createElement('div');
   resultText.classList.add('result');
   const resultDescription = document.createElement('p');
@@ -59,11 +65,11 @@ const createResultText = (result) => {
 };
 
 export const clearStatsLine = () => {
-  document.getElementById('stats').textContent = '';
+  document.getElementById('stats')!.textContent = '';
 };
 
-export const setStatsLine = (numberOfResults) => {
-  const statsLine = document.getElementById('stats');
+export const setStatsLine = (numberOfResults: number) => {
+  const statsLine = document.getElementById('stats')!;
   if (numberOfResults) {
     statsLine.textContent = `Displaying ${numberOfResults} results.`;
   } else {

@@ -1,6 +1,6 @@
 import { SearchResultItem } from './types/ui.types';
-import { search } from './main';
-import { Page, Pages, SearchResults } from './types/apiResults.types';
+import { search } from './main.js';
+import { Pages, SearchResults } from './types/apiResults.types';
 
 export const getSearchTerm = (): string => {
   const rawSearchTerm = search.value.trim();

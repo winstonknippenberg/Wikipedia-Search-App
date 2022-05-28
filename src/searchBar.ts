@@ -1,4 +1,4 @@
-import { clear, search } from './main';
+import { clear, search } from './main.js';
 
 export const setSearchFocus = () => {
   search!.focus();
